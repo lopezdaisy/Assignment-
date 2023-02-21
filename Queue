@@ -1,0 +1,56 @@
+
+public class Queue {
+    
+    private Node head;
+    private Node tail;
+    private int size;
+    
+    private class Node {
+        private Object data;
+        private Node next;
+        
+        public Node(Object data) {
+            this.data = data;
+            this.next = null;
+        }
+    }
+    
+    public void enqueue(Object data) {
+        Node newNode = new Node(data);
+        if (tail == null) {
+            head = newNode;
+        } else {
+            tail.next = newNode;
+        }
+        tail = newNode;
+        size++;
+    }
+    
+    public Object dequeue() {
+        if (head == null) {
+            throw new NoSuchElementException();
+        }
+        Object data = head.data;
+        head = head.next;
+        if (head == null) {
+            tail = null;
+        }
+        size--;
+        return data;
+    }
+    
+    public Object peek() {
+        if (head == null) {
+            throw new NoSuchElementException();
+        }
+        return head.data;
+    }
+    
+    public int size() {
+        return size;
+    }
+    
+    public boolean isEmpty() {
+        return size == 0;
+    }
+}
